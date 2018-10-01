@@ -44,3 +44,10 @@ This is the Dockerfile for our web container. It extends the [Nginx base image](
 
 `deploy/vhost.conf`
 This is the Nginx config file thats added to our web container. It's a pretty standard host configuration that proxy's PHP requests to our app container. You'll notice that it communicates with the app container via address `app:9000`. The `app` name is what we named our service and linked to in `docker-compose.yml`, so Docker will know we mean that container and route the request appropriately.
+
+## Troubleshooting 
+In case you have problems with file permissions, on your *host* machine grant nginx the permissions to `storage` and `bootstrap/cache` folders: 
+```
+sudo chgrp -R www-data storage bootstrap/cache
+sudo chmod -R ug+rwx storage bootstrap/cache
+```
